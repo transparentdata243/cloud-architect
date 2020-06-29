@@ -1,0 +1,11 @@
+E1T4.txt - Text file identifying 2 poor security practices with justification.
+
+
+1.WebAppSG opens ingress port 80. But the application does not need port 80. This
+  should be closed in the security group.
+
+2.The instance role can access all S3 buckets with all S3 privileges. But the
+  application only seem to access 1 S3 bucket, the free recipe and only need
+read access to the bucket
+
+
