@@ -1,0 +1,74 @@
+ubuntu@ip-10-1-0-208:~$ mysql -h database-1.czub2ayzcbwn.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 16
+Server version: 5.7.22-log Source distribution
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| innodb             |
+| mysql              |
+| performance_schema |
+| sys                |
+| udacity            |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use udacity
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create table cloud_architect project VARCHAR(256) status VARCHAR(20)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'project VARCHAR(256) status VARCHAR(20)' at line 1
+mysql> create table cloud_architect (project VARCHAR(256), status VARCHAR(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into cloud_architect recoverability 60%
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'recoverability 60%' at line 1
+mysql> insert into cloud_architect (recoverability, 60%)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '60%)' at line 1
+mysql> insert into cloud_architect (project,status) VALUES (recoverability, 60%);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> insert into cloud_architect (project,status) VALUES ('recoverability', '60%');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_udacity |
++-------------------+
+| cloud_architect   |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> describe cloud_architect
+    -> ;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| project | varchar(256) | YES  |     | NULL    |       |
+| status  | varchar(20)  | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from cloud_architect;
++----------------+--------+
+| project        | status |
++----------------+--------+
+| recoverability | 60%    |
++----------------+--------+
+1 row in set (0.00 sec)

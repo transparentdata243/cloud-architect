@@ -1,0 +1,27 @@
+The time used in this document is from the AWS documentation below:
+https://aws.amazon.com/blogs/database/amazon-rds-under-the-hood-single-az-instance-recovery/
+
+
+Minimum RTO for a single AZ outage
+Since we use multiple AZs for our database, the minimum RTO in this case should be zero for our service. 
+For the outage AZ itself, it is based on Amazon:
+"RTO for recovery with an RDS Single-AZ instance failure can vary from minutes to hours."
+
+
+Minimum RTO for a single region outage
+We need to failover manually for a single region outage. 
+The time it takes consists of:
+0. the problem appears and the time it takes to trigger the alerts
+1. on call person gets the alert message and gets ready after root causing the issue
+2. the time it takes to promote the replica to the new master
+3. route the traffic to the new endpoint
+
+
+
+Minimum RPO for a single AZ outage
+If one database fails, the RPO is the time it takes for us to route our application requests to the database in another AZ.
+This should be minimal and automatic. 
+
+
+Minimum RPO for a single region outage
+RPO is the time it takes to route application requests to the secondary region. It should be minutes.
