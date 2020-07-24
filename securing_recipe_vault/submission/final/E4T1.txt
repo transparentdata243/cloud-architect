@@ -1,0 +1,55 @@
+# Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
+1.use key-based authentication instead of password-based.
+2.limit the source IP that can issue ssh connections to our instances
+3.We can also automatically block malicious IP addresses based on ssh brute force alerts based on the aws references below.
+The high level steps:
+  A GuardDuty finding is raised with suspected malicious activity.
+  A CloudWatch Event is configured to filter for GuardDuty Finding type.
+  A Lambda function is invoked by the CloudWatch Event and parses the GuardDuty finding.
+  State data for blocked hosts is stored in Amazon DynamoDB table. The Lambda function checks the state table for existing host entry.
+  The Lambda function creates a Rule inside AWS WAF and in a VPC NACL.
+  A notification email is sent via Amazon Simple Notification Service (SNS).
+
+https://aws.amazon.com/blogs/security/how-to-use-amazon-guardduty-and-aws-web-application-firewall-to-automatically-block-suspicious-hosts/
+
+
+# Neither instance should have had access to the secret recipes bucket, in the even that instance API credentials were compromised how could we have prevented access to sensitive data.
+
+1. Change the IAM policy of the compromised instance to reduce its capability. In this case, remove its privilege to access
+the secret receipe S3. e.g., create modify the policy as below:
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::cand-c3-free-recipes*",
+            "Effect": "Allow"
+        }
+    ]
+}
+
+In this scenario, this is ok, but it might have complications if there are other instances using the same IAM role. 
+
+
+2. An alternative is to add an explicit deny IAM policy on the bucket. E.g. below
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::cand-c3-secret-recipes*",
+        "arn:aws:s3:::cand-c3-secret-recipes*/*"
+      ],
+      "Condition": {
+        "StringNotLike": {
+          "aws:userId": [
+            "AROAEXAMPLEID:userid"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -6,6 +6,8 @@ E1T4.txt - Text file identifying 2 poor security practices with justification.
 
 2.The instance role can access all S3 buckets with all S3 privileges. But the
   application only seem to access 1 S3 bucket, the free recipe and only need
-read access to the bucket
+read access to the bucket.
+
+3.The WebAppSG has a rule to allow all incoming connections. This should be removed.
 
 

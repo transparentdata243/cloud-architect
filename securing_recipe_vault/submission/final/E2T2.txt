@@ -1,0 +1,14 @@
+Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
+
+Bonus - provide recommendations on how to remediate the vulnerabilities.
+
+The Security hub scanning result title is self-expalanatory for mitigations. Here are a few example rules that did not pass
+
+PCI.S3.2 S3 buckets should prohibit public read access
+PCI.IAM.4 Hardware MFA should be enabled for the root user
+CIS 1.5
+Ensure IAM password policy requires at least one uppercase letter
+CIS 1.6
+Ensure IAM password policy requires at least one lowercase letter
+CIS 2.9
+Ensure VPC flow logging is enabled in all VPCs

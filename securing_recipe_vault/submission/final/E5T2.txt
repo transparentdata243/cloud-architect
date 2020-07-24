@@ -1,0 +1,19 @@
+# Identify tools that will allow you to do the following:
+
+## Scan infrastructure as code templates
+TFlint
+
+### Example vulnerability
+wide open ssh
+
+##Scan AMI’s or containers for OS vulnerabilities
+Qualys
+
+### Example vulnerability
+Reflected Cross-Site Scripting Vulnerabilities
+
+##Scan an AWS environment for cloud configuration vulnerabilities
+Amazon inspector
+
+### Example vulnerability
+ Instance i-03dc36ef88068373c is not compliant with rule 1.1.1.1 Ensure mounting of cramfs filesystems is disabled, 1.0.0 CIS Ubuntu Linux 18.04 LTS Benchmark. Applicable profiles: Level 1 - Server, Level 2 - Workstation, Level 2 - Server, Level 1 - Workstation.
