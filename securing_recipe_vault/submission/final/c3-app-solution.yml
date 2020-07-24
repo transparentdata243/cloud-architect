@@ -72,7 +72,7 @@ Resources:
     Properties:
       ImageId: !Ref AmiIdRecipeWebServiceInstance
       InstanceType: t3.micro
-      #KeyName: !Ref KeyPair
+      KeyName: !Ref KeyPair
       SecurityGroupIds:
       - !GetAtt WebAppSG.GroupId
       SubnetId: !ImportValue PublicSubnetTrusted
