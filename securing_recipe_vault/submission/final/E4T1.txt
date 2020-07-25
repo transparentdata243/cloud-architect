@@ -17,16 +17,19 @@ https://aws.amazon.com/blogs/security/how-to-use-amazon-guardduty-and-aws-web-ap
 
 1. Change the IAM policy of the compromised instance to reduce its capability. In this case, remove its privilege to access
 the secret receipe S3. e.g., create modify the policy as below:
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": "s3:*",
-            "Resource": "arn:aws:s3:::cand-c3-free-recipes*",
-            "Effect": "Allow"
-        }
-    ]
-}
+
+      Policies:
+        - PolicyName: InstanceRolePolicy-C3
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 's3:GetObject'
+                Resource: 'arn:aws:s3:::can-c3-free-recipes-122731332455'
+              - Effect: Allow
+                Action: 's3:ListObject'
+                Resource: 'arn:aws:s3:::can-c3-free-recipes-122731332455'
+
 
 In this scenario, this is ok, but it might have complications if there are other instances using the same IAM role. 
 

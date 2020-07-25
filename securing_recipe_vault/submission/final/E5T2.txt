@@ -4,13 +4,16 @@
 TFlint
 
 ### Example vulnerability
-wide open ssh
+-Block includes a postntially sensitive attribute which is defined within the project. This shows up when user put aws_secret_key in the IaaC template
+-variable password includes a potentially sensitive default value. This shows up when user defines a password variable in the IaaC template.
+
 
 ##Scan AMI’s or containers for OS vulnerabilities
 Qualys
 
 ### Example vulnerability
-Reflected Cross-Site Scripting Vulnerabilities
+-CentOS Security update for nss
+-F5 BIG-IP Remote Code Execution Vulnerability (CVE-2020-5902)
 
 ##Scan an AWS environment for cloud configuration vulnerabilities
 Amazon inspector
